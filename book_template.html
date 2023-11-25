@@ -1,0 +1,41 @@
+<html>
+  <link rel="stylesheet" href="books.css">
+  <head>
+    <title> Books </title>
+  </head>
+
+  <body>
+    {% macro book_cards(books, n) %}
+      {% if n < books|length %}
+        {% for book in books[:(n//2)] %}
+          <div class="card">
+            <h5>Название: {{book.title}}</h5>
+            <p>Автор: {{book.author}}</p>
+            <p><small>Цена: {{book.price}}</small></p>
+          </div>
+        {% endfor %}
+        <div class="card">...</div>
+        {% for book in books[-(n-n//2):] %}
+          <div class="card">
+            <h5>Название: {{book.title}}</h5>
+            <p>Автор: {{book.author}}</p>
+            <p><small>Цена: {{book.price}}</small></p>
+          </div>
+        {% endfor %}
+      {% else %}
+        {% for book in books %}
+              <div class="card">
+                  <h5>{{book.title}}</h5>
+                  <p>{{book.author}}</p>
+                  <p><small>{{book.price}}</small></p>
+              </div>
+          {% endfor %}
+      {% endif %}
+      <br><p>{{n}} карточек должно быть.</p>
+    {% endmacro %}
+
+    <div class="container">
+      {{book_cards(books, n)}}
+    </div>
+  </body>
+</html>
